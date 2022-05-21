@@ -27,8 +27,8 @@ const WeatherBox = () => {
           setPending(false);
         });
       } else {
-        alert("ERROR!");
         setError(true);
+        setPending(false);
       }
     });
   }, []);
