@@ -2,13 +2,16 @@ import PickCity from "../PickCity/PickCity";
 import WeatherSummary from "../WeatherSummary/WeatherSummary";
 import Loader from "../Loader/Loader";
 import { useCallback, useState } from "react";
+import ErrorBox from "../ErrorBox/ErrorBox";
 
 const WeatherBox = () => {
   const [cityWeatherData, setCityWeatherData] = useState("");
   const [pending, setPending] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleCityChange = useCallback((city) => {
     setPending(true);
+    setError(false);
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=93c3ef7ff071b6442b584c7cc7cb23e2&units=metric`
     ).then((res) => {
@@ -25,6 +28,7 @@ const WeatherBox = () => {
         });
       } else {
         alert("ERROR!");
+        setError(true);
       }
     });
   }, []);
@@ -34,6 +38,7 @@ const WeatherBox = () => {
       <PickCity action={handleCityChange} />
       {cityWeatherData && <WeatherSummary {...cityWeatherData} />}
       {pending && <Loader />}
+      {error && <ErrorBox />}
     </section>
   );
 };
