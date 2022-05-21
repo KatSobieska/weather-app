@@ -29,6 +29,7 @@ const WeatherBox = () => {
       } else {
         setError(true);
         setPending(false);
+        setCityWeatherData("");
       }
     });
   }, []);
