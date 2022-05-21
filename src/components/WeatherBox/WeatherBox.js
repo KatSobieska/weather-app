@@ -25,7 +25,7 @@ const WeatherBox = () => {
   return (
     <section>
       <PickCity action={handleCityChange} />
-      <WeatherSummary {...cityWeatherData} />
+      {cityWeatherData && <WeatherSummary {...cityWeatherData} />}
       <Loader />
     </section>
   );
